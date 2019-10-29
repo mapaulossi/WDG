@@ -1,0 +1,22 @@
+”
+defVar --name nomeArquivoCompleto --type String
+defVar --name nomeSemNumero --type Numeric
+defVar --name extensao --type String
+defVar --name numero --type String
+defVar --name numeroConvertido --type Numeric
+defVar --name escreveNoArquivo --type String --value arquivo
+defVar --name varPara --type Numeric
+defVar --name caminho --type String --value "C:\\Users\\mpaulossi\\Desktop\\Pasta pessoal/arquivo-15.txt"
+defVar --name aEscrever --type String
+getFileInfo --path "${caminho}" nomeArquivoCompleto=name extensao=extension
+parseText --text "${nomeArquivoCompleto}" --query "-" --startindex 1 nomeSemNumero=value
+replaceText --texttoparse "${nomeArquivoCompleto}" --textpattern "${extensao}" nomeArquivoCompleto=value
+incrementVar --number ${nomeSemNumero}
+getSubString --text "${nomeArquivoCompleto}" --start ${nomeSemNumero} numero=value
+convertStringToNumber --text "${numero}" --culture "Default" numeroConvertido=value
+for --variable ${varPara} --from 1 --to ${numeroConvertido} --step 1
+concatTexts --text "${aEscrever}" --value "\r\n${escreveNoArquivo}" aEscrever=value
+next
+trimString --text "${aEscrever}" --trimoption "TrimStartAndEnd" aEscrever=value
+writeToFile --value "${aEscrever}" --file "${caminho}" caminho=value
+logMessage --message "${numero}" --type "Info"*19.7.1.0

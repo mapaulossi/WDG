@@ -1,0 +1,16 @@
+çdefVar --name cnpjdigitado --type Boolean
+defVar --name captchaSolveOrNot --type Boolean
+defVar --name activeOrNot --type String
+defVar --name contadorReCaptcha --type Numeric --value 0
+webStart --name web02 --type "Chrome"
+webNavigate --url "https://www.receita.fazenda.gov.br/pessoajuridica/cnpj/cnpjreva/cnpjreva_solicitacao2.asp"
+webSet --value 21520979000107 --selector "Id" --id cnpj --simulatehuman  cnpjdigitado=value
+while --left "${captchaSolveOrNot}" --operator "Equal_To" --right False
+webSolveCaptcha --auto  captchaSolveOrNot=value
+incrementVar --number ${contadorReCaptcha}
+endWhile
+webClick --selector "Id" --id submit1
+webGet --selector "CssSelector" --css "body > div > table > tbody > tr > td > table:nth-child(23) > tbody > tr > td:nth-child(1) > font:nth-child(3) > b" activeOrNot=value
+logMessage --message "${activeOrNot}" --type "Info"
+logMessage --message "Tentativas de reCaptcha: ${contadorReCaptcha}" --type "Info"
+webClose --name web02 --leavebrowseropen *19.7.1.0

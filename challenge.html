@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<style>
+   .desafio{
+	display: grid;
+	grid-gap: 5px;
+	grid-template-columns: 1fr 1fr 1fr;
+   }
+</style>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <h1>Desafio</h1>
+	<p> Clique no ultimo botao até a mensagem 'enough' aparecer na tela</p>
+    <div class="desafio" id="divDesafio">
+       <button onclick="tryAgain(1)">Try again</button>
+    </div>
+</body>
+
+<script>
+	var lastNum = 0
+    function tryAgain(num) {
+	  console.log(random)
+	  if(random > 1){
+			if(num > lastNum){
+				nextNum = num+1
+				document.getElementById("divDesafio").innerHTML += '<button onclick="tryAgain('+nextNum+')">Try again</button>';
+				random--;
+				
+				lastNum = num
+			}else{
+				document.getElementById("divDesafio").innerHTML = ' <button onclick="tryAgain(1)">Try again</button>'
+				lastNum = 0
+				random = (Math.floor(Math.random() * 5))+3;
+			}
+	  }else{
+		document.getElementById("divDesafio").innerHTML = '<h2>Enough</h2>'
+	  }
+	  
+    
+	  
+    }
+
+    var random = Math.floor(Math.random() * 5)+3;
+    
+</script>
+
+</html>

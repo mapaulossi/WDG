@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+	margin:7%
+}
+a,button,#resposta {
+	display:block;
+	margin-top:20px
+}
+</style>
+<script>
+function confirmacao() {
+	resposta = confirm('Está é uma confimação do navegador');
+	document.getElementById('').innerText = (resposta ? "Resposta " : "Resposta Não");
+}
+</script>
+<body>
+	<h1>Movimentações de Página</h1>
+	<a id="abrir" href="http://www.grupowdg.com.br/">Abrir na mesma aba</a>
+	<a id="abrirAba" href="NovaPagina.html" target="_blank">Abrir uma nova aba</a>
+	<button id="botao" onclick="alert('Este é uma alerta do navegador')">Apresentar alerta</button>
+	<button id="botao" onclick="confirmacao()">Apresentar confirmação</button>
+	<div id="resposta"></div>
+</body>
+</html>

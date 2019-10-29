@@ -1,0 +1,12 @@
+ídefVar --name arquivos --type List --innertype String
+defVar --name arquivo --type String
+defVar --name forFile --type String
+defVar --name diretorio --type String --value "C:\\Users\\mpaulossi\\Desktop\\Pasta pessoal\\WDG\\bears"
+defVar --name sucesso --type Boolean
+getFiles --path "${diretorio}" arquivos=value
+foreach --collection "${arquivos}" --variable "${arquivo}"
+getFileInfo --path "${arquivo}" forFile=name
+if --left "${forFile}" --operator "Contains" --right bear --negate 
+fileMove --from "${arquivo}" --to "C:\\Users\\mpaulossi\\Desktop\\Pasta pessoal\\WDG\\not a bear" sucesso=value
+endIf
+endFor*19.7.1.0

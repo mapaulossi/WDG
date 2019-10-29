@@ -1,0 +1,33 @@
+defVar --name imagem --type Image
+defVar --name imagemparacaptcha --type Boolean
+defVar --name textocaptcha --type String
+defVar --name tabela --type DataTable
+defVar --name arquvoExcel --type Excel
+defVar --name linhas --type Numeric
+defVar --name colunas --type Numeric
+defVar --name dados --type List --innertype String
+defVar --name linhaDadosTablea --type String
+defVar --name n --type Numeric
+defVar --name linhaDados --type String --value "#problems_table > tbody > tr:nth-child(2) > td.id_column"
+defVar --name x --type Numeric --value 1
+defVar --name DadosTabela --type String
+webStart --name web01 --type "Chrome"
+webNavigate --url "https://projecteuler.net/about"
+webClick --selector "CssSelector" --css "#navigation > a:nth-child(6)"
+if --left info_panel --operator "Contains" --right "Logged in as" --negate 
+goSub --label Login
+endIf
+webGetTable --selector "XPath" --xpath "//*[@id=\"problems_table\"]" tabela=value linhas=rows colunas=columns
+logMessage --message "${tabela}" --type "Info"
+for --variable ${n} --from 1 --to ${linhas} --step 1
+webGet --selector "CssSelector" --css "${linhaDados}(${x})" DadosTabela=value
+next
+webClose --name web01 --leavebrowseropen 
+beginSub --name Login
+webSet --value mpaulossi --selector "CssSelector" --css "#username"
+webSet --value fut3b00l --selector "CssSelector" --css "#password"
+webGetImage --selector "Id" --id captcha_image imagem=value
+solveCaptcha --image "${imagem}" textocaptcha=value imagemparacaptcha=success
+webSet --value "${textocaptcha}" --selector "CssSelector" --css "#content > form > table > tbody > tr:nth-child(3) > td:nth-child(2) > div > input[type=text]"
+webClick --selector "CssSelector" --css "#content > form > table > tbody > tr:nth-child(6) > td:nth-child(2) > input[type=submit]"
+endSub*19.7.1.0

@@ -1,0 +1,17 @@
+þimport --name image1 --type "Image" --content iVBORw0KGgoAAAANSUhEUgAAAG8AAAAGCAYAAADNPsDyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJzSURBVEhLvZU/aBpRHMe/7egtyZDpHBpBHA4hJXSXdovgEmmgBwYCN9wWOnTIkNIMGTKEbA5CIYJDIKUg2M3iWFoKAXEQoSnFW5ohtzzX9v3e+73zbIytZ5oPHL6/X3/v9/u933uw+fzFLySgtF9DxUlxL0B76xWq3PuvFPdwWnFg3ed//iv3bFvC4G3g9VsXeWsEIVKwLGDYcbHL1prACjGScxxg0UN95xBN1TH7VUcyQrfu4U1LNo0D5Ppu6CBv6xVa38PJWQFpPaQJOii3V9hpMWj8ZU02zJ4A3d4y8pxwpNfPNvBsQl+34R/hvMATRGT7dC3Ra2D7wJ5uG9nwp15k22I85N/5KK4hQ54Sl3j3JVBD6Sd7KKnWGCv8jPKWizYtsRxs7m/Ixjjw3bor5zsYIoV85Qi+2sXI9csDOd+J69ewW+9BqBHKbjlPTmgdYpva6mugSwvsAk4mBG1k8B5l3p8uNJC7oS9hR1NASK/eG8VsN0xqWU5B2n6LbSZwFDCjJ207ndBLRqLgldZXVZaL7xdoVgfS+RJrFY+L1BgjQu2Y6kD/WkvyECbwuMZPumny0H01bSMXd7bM9o90E36E7JDZ+McNnJ/RF7/RcQJ8OvjAbSJAf4q+n9U3xHJcpWeeBmV7BGu1ruQpZmP0jC+aXy91wB+t3Uj2eUkQPA9PzYHUAU2pSCGzPkc2iVC64G6gMq3KH2e3uukLYm5e9C1Y5q6v4olzN8wfPD+rg0XvgDkYl57bsslk33BAJe4C31TqmZvqIaem+Sb8jSnZbi/x28PZvQhRlVClkKF3+Njjzgym2Gb00lm9f6JqqZGkAL8Bm6chvWwsU00AAAAASUVORK5CYII=
+import --name image2 --type "Image" --content iVBORw0KGgoAAAANSUhEUgAAAGEAAAAFCAYAAABVY4LvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJWSURBVEhLrVVNaxpRFD3tZmaRQBcjNKIwiIQubVcRoavgSvAPBIRsEki2pYQKgyCE0m36A4T8ASEryapF7Mq4aksJIihNqbMQ4mJctffe956OdcYI6YHB++5973Deux8+OXx39AeR2EPl7T4y9gxBYMG2gXGvjoumihYqb1B0LYrNKGYpZzBA6/0l2rIw52VBmKHf+oBGh8z8Ac6KLmza35+6yDhqh+Iv4dTLIaFcCn4PXveZOqNdAvZ/vCLDnPHRH2wjQ7oYzDdMVfFqiV/ZKB+jltMBxlx7NFcwuMZ5w4nWxhr+5ZtrexhP9e8q8lkk+cbBHT5998WVeHGAglgL2NNv8Gp1dHmL7eJ1ZY+MRQL7rTrFexjDQqZ4jLKc0qD92yOK98L8V7hoDRCIx0eXuOUynUucsy3fNfq8wcnhdInQQRKf4enziVwV6RV+gn4wfljmaw1mIe0Gy1y2myPtMdpMAvjhDR9pO1vii0dsEgq7O1J1wa9btJsjekSCvYNsno0Fgqm6YHOkfu0tEmMSiHtMuPJJ/FDCDtLhR6Pqu+HK/D3VF1uP8kkVNY+/cIeF4eNr44u2GT6GEfzllKpY290XPu5oWbP2OTRXZ0K3WA/DZ96i/eNOJe55dqVooxCThBJeGmEi1LSgheTuZtkVBFO6yv8Bjz8ZK7rapPMeCdMJ82/D8RGH+0m4ADZHdBLKKfXoPCeNQN3Scdk11TAe8ei4xU8pBdM5JaQlrCvzIURUn7OlZ7Outsdg3rUyYjT4f+qkpBdrEKHN8CVS6vzSFBHPOgB/AemQFZkxhrEdAAAAAElFTkSuQmCC
+defVar --name codigo --type String
+defVar --name horas --type String
+defVar --name apareceuApontamento --type Boolean
+defVar --name clicouApontamento --type Boolean
+defVar --name apontamentowindow --type Window
+webStart --name web01 --type "Chrome"
+webNavigate --url "file:///C:/Users/mpaulossi/Desktop/Pasta%20pessoal/WDG/ProjetoRafa.html"
+webGet --selector "Name" --name FirstName codigo=value
+webGet --selector "Name" --name SecondeName horas=value
+webNavigate --url "https://my.dnet.deloitte.com/br"
+webWaitElement --selector "CssSelector" --css "#Transacionais > tools-card > div > div:nth-child(3) > div > div.details > a" --timeout 00:01:40
+webClick --selector "CssSelector" --css "#Transacionais > tools-card > div > div:nth-child(3) > div > div.details > a" --simulatehuman 
+//webWaitElement --selector "LinkText" --linktext "https://web.deloitte.com.br/sai/apontamentohorasweb/Cadastro/frmApontamentoEntrada.aspx" --timeout 00:01:40 apareceuApontamento=value
+//webClick --selector "LinkText" --linktext "https://web.deloitte.com.br/sai/apontamentohorasweb/Cadastro/frmApontamentoEntrada.aspx" clicouApontamento=value
+webClose --name web01 --leavebrowseropen *19.7.1.0

@@ -1,0 +1,52 @@
+�defVar --name planilhaPessoas --type Excel
+defVar --name tabelaPessoas --type DataTable
+defVar --name numLinhas --type Numeric
+defVar --name numCol --type Numeric
+defVar --name linhaDadosTabela --type Numeric
+defVar --name nome --type String
+defVar --name cpf --type String
+defVar --name dataNascimento --type String
+defVar --name cep --type String
+defVar --name estado --type String
+defVar --name cepValido --type Boolean
+defVar --name cpfValido --type Boolean
+defVar --name ambosValido --type String --value "CPF e CEP são válidos"
+defVar --name cpfValidoTexto --type String --value "CPF é Valido e CEP inválido"
+defVar --name cepValidoTexto --type String --value "O CEP é valido e CPF inválido"
+defVar --name somalinha --type Numeric
+defVar --name ambosInvalidos --type String --value "Ambos Inválidos"
+defVar --name escreveCEPSite --type Boolean
+defVar --name clickEmBuscar --type Boolean
+defVar --name novaConsulta --type Boolean
+webStart --name web01 --type "Chrome"
+webNavigate --url "http://www.buscacep.correios.com.br/sistemas/buscacep/"
+excelOpen --file "C:\\Users\\mpaulossi\\Desktop\\Pasta pessoal\\WDG\\pessoas.xlsx" planilhaPessoas=value
+excelGetTable --file ${planilhaPessoas} --getfirstsheet  --entiretable  --hasheaders  tabelaPessoas=value numLinhas=rows numCol=columns
+for --variable ${linhaDadosTabela} --from 1 --to ${numLinhas} --step 1
+mapTableRow --dataTable ${tabelaPessoas} --row ${linhaDadosTabela} --mappings "number=1=${nome},number=2=${cpf},number=3=${dataNascimento},number=4=${cep},number=5=${estado}"
+validateText --text "${cpf}" --texttype "BrazillianCPF" cpfValido=value
+validateText --text "${cep}" --texttype "BrazillianCEP" cepValido=value
+webSet --value "${cep}" --selector "CssSelector" --css "#Geral > div > div > span:nth-child(3) > label > input" escreveCEPSite=value
+webClick --selector "CssSelector" --css "#Geral > div > div > div.btnform > input" clickEmBuscar=value
+evaluate --expression "${linhaDadosTabela} + 1" somalinha=value
+webGet --selector "Id" --id "body > div.back > div.tabs > div:nth-child(2) > div > div > div.column2 > div.content > div.ctrlcontent > div:nth-child(12) > a"
+webClick --selector "CssSelector" --css "body > div.back > div.tabs > div:nth-child(2) > div > div > div.column2 > div.content > div.ctrlcontent > div:nth-child(12) > a" novaConsulta=value
+goSub --label ValidaCPFeCEP
+next
+excelClose --file ${planilhaPessoas} --save 
+webClose --name web01
+beginSub --name buscaCEP
+endSub
+beginSub --name ValidaCPFeCEP
+if --left "${cpfValido}" --operator "Is_True"
+if --left "${cepValido}" --operator "Is_True"
+excelSet --value "${ambosValido}" --file ${planilhaPessoas} --getfirstsheet  --row ${somalinha} --column 6
+else
+excelSet --value "${cpfValidoTexto}" --file ${planilhaPessoas} --getfirstsheet  --row ${somalinha} --column 6
+endIf
+elseIf --left "${cepValido}" --operator "Is_True"
+excelSet --value "${cepValidoTexto}" --file ${planilhaPessoas} --getfirstsheet  --row ${somalinha} --column 6
+else
+excelSet --value "${ambosInvalidos}" --file ${planilhaPessoas} --getfirstsheet  --row ${somalinha} --column 6
+endIf
+endSub*19.7.1.0

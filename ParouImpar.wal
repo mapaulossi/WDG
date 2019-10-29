@@ -1,0 +1,20 @@
+�
+defVar --name textoAnalisado --type String
+defVar --name recorteNumero --type Numeric
+defVar --name numeroIsolado --type String
+defVar --name resultadoParOuImpar --type Numeric
+defVar --name resultadoFinal --type String
+defVar --name numeroIsoladoCovertido --type Numeric
+setVar --name "${textoAnalisado}" --value "Identifique se o número a seguir é par: 20"
+parseText --text "${textoAnalisado}" --query ":" --startindex 1 recorteNumero=value
+incrementVar --number ${recorteNumero}
+getSubString --text "${textoAnalisado}" --start ${recorteNumero} numeroIsolado=value
+trimString --text "${numeroIsolado}" --trimoption "TrimEnd" numeroIsolado=value
+convertStringToNumber --text "${numeroIsolado}" --culture "Default" numeroIsoladoCovertido=value
+logMessage --message "${numeroIsolado}" --type "Info"
+evaluate --expression "${numeroIsoladoCovertido} % 2" resultadoParOuImpar=value
+if --left "${resultadoParOuImpar}" --operator "Equal_To" --right 0
+messageBox --title MensagemPar --text "O número ${numeroIsoladoCovertido} é par" --icon "Information" --buttons "OK" --defaultbutton "FirstButton" resultadoFinal=value
+else
+messageBox --title MensagemImpar --text "O número ${numeroIsoladoCovertido} é impar" --icon "Information" --buttons "OK" --defaultbutton "FirstButton" resultadoFinal=value
+endIf*19.7.1.0

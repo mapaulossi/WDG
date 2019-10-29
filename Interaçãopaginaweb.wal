@@ -1,0 +1,23 @@
+•	defVar --name interator --type Numeric
+defVar --name tabela --type DataTable
+defVar --name botaoTrue --type Boolean
+defVar --name inputTrueOrFalse --type Boolean
+webStart --name web01 --type "Chrome"
+webNavigate --url "file:///C:/Users/mpaulossi/Desktop/Pasta%20pessoal/WDG/InteracaoWeb.html"
+for --variable ${interator} --from 1 --to 5 --step 1
+webClick --selector "Id" --id mudarCor
+delay --timeout 00:00:01.0300000
+next
+webClick --selector "Id" --id meses --simulatehuman 
+webSetComboBox --selectoptionby "Value" --value Mar√ßo --selector "Id" --id meses
+webSet --value Deloitte --selector "Id" --id campoTexto --simulatehuman 
+webGetTable --selector "Id" --id tabela tabela=value
+logMessage --message "${tabela}" --type "Info"
+webWaitElement --selector "Id" --id campoTextoOculto --timeout 00:00:10 inputTrueOrFalse=value
+if --left "${inputTrueOrFalse}" --operator "Is_True"
+webSet --value Deloitte --selector "Id" --id campoTextoOculto --simulatehuman 
+else
+webClick --selector "Id" --id botaoRevelacao --simulatehuman  botaoTrue=value
+webSet --value Deloitte --selector "Id" --id campoTextoOculto --simulatehuman 
+endIf
+webClose --name web01 --leavebrowseropen *19.7.1.0

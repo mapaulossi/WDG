@@ -1,0 +1,16 @@
+¦defVar --name css --type String --value "#divDesafio > button:nth-child(1)"
+defVar --name enoughOrNot --type Boolean --value True
+defVar --name numeroPreCorte --type Numeric
+defVar --name numeroCortado --type Numeric
+defVar --name n --type Numeric --value 1
+defVar --name numero --type Numeric
+defVar --name numeroText --type String
+defVar --name enough --type String
+webStart --name web03 --type "Chrome"
+webNavigate --url "file:///C:/Users/mpaulossi/Desktop/Pasta%20pessoal/WDG/challenge.html"
+while --left "${enoughOrNot}" --operator "Is_True"
+webClick --selector "CssSelector" --css "#divDesafio > button:nth-child(${n})" enoughOrNot=value
+incrementVar --number ${n}
+endWhile
+webGet --selector "CssSelector" --css "#divDesafio > h2" enough=value
+webClose --name web03 --leavebrowseropen *19.7.1.0

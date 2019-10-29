@@ -1,0 +1,14 @@
+
+	Ó;cÙı…WG®¥ªé¡ZUùdefVar --name wasSuccessfull --type Boolean
+defVar --name retornoCep --type String
+defVar --name cep --type String --value "05709-030"
+defVar --name logradouro --type String
+defVar --name bairro --type String
+defVar --name cidade --type String
+defVar --name estado --type String
+setVar --name "${cep}" --value "65074-863"
+httpRequest --verb "Get" --url "https://viacep.com.br/ws/${cep}/json/" wasSuccessfull=success retornoCep=value
+if --left "${wasSuccessfull}" --operator "Is_True"
+mapJson --json "${retornoCep}" --mappings "cep=${cep},logradouro=${logradouro},bairro=${bairro},localidade=${cidade},uf=${estado}"
+logMessage --message "cep:${cep}\r\nrua:${logradouro}\r\nbairro:${bairro}\r\ncidade:${cidade}\r\nestado:${estado}" --type "Info"
+endIf"	3dUïÚG£Hm†E¤V*19.7.1.0
